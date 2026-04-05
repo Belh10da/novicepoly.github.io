@@ -263,7 +263,7 @@
     <div class="hero">
       <div>
         <h1>NOVICEPOLY</h1>
-        <p>Bütün güncel şans kartları eklendi. Çekilen kartlar destenin en altına atılıyor!</p>
+        <p>Buraya bakan gay</p>
       </div>
       <div class="controls-top">
         <select id="playerCount" class="select">
