@@ -386,7 +386,7 @@
       { id: 24, type: 'property', name: 'ANKUVA MERDİVENLER', group: 'kirmizi', price: 240, rent: [20, 100, 300, 750, 925, 1100], mortgage: 120 },
       { id: 25, type: 'station', name: 'YHT GAR', group: 'istasyon', price: 200, rentByCount: [25, 50, 100, 200], mortgage: 100 },
       { id: 26, type: 'property', name: 'ESKİŞEHİR', group: 'sari', price: 260, rent: [22, 110, 330, 800, 975, 1150], mortgage: 130 },
-      { id: 27, type: 'property', name: 'BOLU', group: 'sari', price: 260, rent: [22, 110, 330, 800, 975, 1150], mortgage: 130 },
+      { id: 27, type: 'property', name: 'KAHRAMANMARAŞ', group: 'sari', price: 260, rent: [22, 110, 330, 800, 975, 1150], mortgage: 130 },
       { id: 28, type: 'utility', name: 'SÖZERİ', group: 'servis', price: 150, mortgage: 75 },
       { id: 29, type: 'property', name: 'KONYA', group: 'sari', price: 280, rent: [24, 120, 360, 850, 1025, 1200], mortgage: 140 },
       { id: 30, type: 'go-to-jail', name: "SİLİVRİ'YE GİT" },
@@ -424,12 +424,12 @@
     // KAMU SANDIĞI KARTLARI LİSTESİ
     const ORIGINAL_COMMUNITY = [
       { text: 'Başlangıca ilerle, bursun yatacak. (M200 AL)', kind: 'move', target: 0, rewardOnPass: false },
-      { text: 'Torpil buldun, hapisten çıkabilirsin. Bu kart saklanabilir.', kind: 'get-out-of-jail' },
+      { text: 'Dilanın kirasının ödeme günü geldi. İyi bir dost ol. M200 öde.', kind: 'money', amount: -200 },
       { text: 'HIST200\'de diğer grubun üyelerini öldürdün. Silivri seni bekler, direkt ilerle.', kind: 'go-to-jail' },
       { text: 'Beste\'yi çamaşır gününde dışarı çağırdın. Kuru temizlemenin parasını öde. M50.', kind: 'money', amount: -50 },
       { text: 'Çağdaş Apartmanı\'na gittin ve çok beğendin. Kendi evlerine restorasyon yaptıracaksın. Sahip olduğun ev başına M40 öde.', kind: 'property-tax', house: 40, hotel: 115 },
       { text: 'Okul ücreti zamlandı. M100 öde.', kind: 'money', amount: -100 },
-      { text: 'Dila tarhana getirdi ama parasını ödememiş. Bankaya M50 öde.', kind: 'money', amount: -50 },
+      { text: 'Dila, Sarıgül marka tarhana getirdi ama parasını ödememiş. Bankaya M50 öde.', kind: 'money', amount: -50 },
       { text: 'Springfest konserine kaçak girdin. M25 kazandın.', kind: 'money', amount: 25 },
       { text: 'Doruk\'la tanışmaya cesaret ettin. Sana kahve ısmarladı. M10 kazandın.', kind: 'money', amount: 10 },
       { text: 'BTO\'ya katıldın ve okul tüm bütçesini size verdi. M200 kazandın.', kind: 'money', amount: 200 },
