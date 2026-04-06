@@ -74,7 +74,7 @@
       container-type: inline-size;
       aspect-ratio: 1 / 1;
       width: 100%;
-      max-width: min(100%, calc(100vh - 120px)); 
+      max-width: min(100%, calc(100vh - 100px)); 
       background: #111;
       border: 3px solid #111;
       padding: 0;
