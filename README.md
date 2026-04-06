@@ -1,6 +1,3 @@
-# novicepoly.github.io
-
-
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
@@ -160,7 +157,14 @@
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       flex-wrap: wrap; gap: 2px; pointer-events: none; z-index: 5;
     }
-    .mini-player { width: 10px; height: 10px; border-radius: 999px; border: 1.5px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+    
+    /* GÜNCELLENEN PİYON STİLLERİ */
+    .mini-player { 
+      width: 18px; height: 18px; border-radius: 999px; border: 1.5px solid #fff; 
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; 
+    }
 
     .center-panel {
       grid-column: 2 / 11; grid-row: 2 / 11; background: var(--board-base); position: relative;
@@ -207,7 +211,13 @@
     .player-card.active { background: #e5e7eb; outline: 2px solid #2563eb; }
     .player-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
     .player-name-row { display: flex; align-items: center; gap: 6px; }
-    .token { width: 12px; height: 12px; border-radius: 999px; display: inline-block; border: 2px solid #111; }
+    
+    /* GÜNCELLENEN TOKEN STİLLERİ */
+    .token { 
+      width: 22px; height: 22px; border-radius: 999px; display: inline-flex; 
+      border: 2px solid #111; align-items: center; justify-content: center; font-size: 13px;
+    }
+    
     .pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 999px; font-size: 11px; border: 1.5px solid #111; background: white; margin-right: 4px; margin-top: 4px; font-weight: 700;}
     .muted { color: var(--muted); }
     .small { font-size: 12px; }
@@ -252,10 +262,96 @@
     .card-modal-footer { padding: 16px; background: #f8fafc; border-top: 2px solid #e2e8f0; }
     .card-modal-footer .btn { width: 100%; font-size: 18px; padding: 14px; }
 
-    @media (max-width: 1024px) {
-      .layout { grid-template-columns: 1fr; }
-      .board-shell { max-width: min(100%, 650px); }
+    /* SETUP MODAL */
+    .setup-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9998; opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+      backdrop-filter: blur(6px);
     }
+    .setup-overlay.active { opacity: 1; pointer-events: auto; }
+
+    .setup-modal {
+      width: 92%; max-width: 480px; background: white;
+      border: 4px solid #111; border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+    .setup-overlay.active .setup-modal { transform: translateY(0) scale(1); }
+
+    .setup-header {
+      background: #111827; color: white;
+      padding: 18px 22px; font-size: 20px; font-weight: 900;
+      letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px;
+    }
+
+    .setup-body { padding: 20px 22px; display: grid; gap: 10px; }
+
+    .setup-player-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .setup-color-dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid #111; flex-shrink: 0;
+    }
+    
+    /* YENİ EKLENEN EMOJİ SEÇİCİ STİLİ */
+    .setup-emoji-select {
+      border: 2px solid #111; border-radius: 10px;
+      padding: 8px 4px; font-size: 16px; outline: none; 
+      background: white; cursor: pointer;
+    }
+    
+    .setup-input {
+      flex: 1; border: 2px solid #111; border-radius: 10px;
+      padding: 9px 12px; font-size: 15px; font-family: inherit;
+      font-weight: 600; outline: none; transition: border-color 0.15s;
+    }
+    .setup-input:focus { border-color: #2563eb; }
+
+    .setup-footer {
+      padding: 16px 22px; background: #f8fafc;
+      border-top: 2px solid #e2e8f0;
+      display: flex; gap: 10px;
+    }
+    .setup-footer .btn { flex: 1; padding: 12px; font-size: 16px; }
+
+    /* STATİSTİK PANELİ */
+    .stats-grid { display: grid; gap: 8px; }
+    .stat-card {
+      background: #f8fafc; border: 2px solid #111;
+      border-radius: 10px; padding: 10px 12px;
+    }
+    .stat-card-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .stat-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+    .stat-row { font-size: 12px; }
+    .stat-label { color: var(--muted); font-weight: 600; }
+    .stat-value { font-weight: 800; font-size: 13px; }
+    .net-worth-bar {
+      height: 6px; border-radius: 999px; margin-top: 6px;
+      background: #e5e7eb; overflow: hidden;
+    }
+    .net-worth-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+
+    /* KAYDET/YÜKLE BUTONLARI */
+    .save-row { display: flex; gap: 6px; }
+    .btn.save { background: #dcfce7; color: #166534; }
+    .btn.load { background: #dbeafe; color: #1e40af; }
+    .btn.danger { background: #fee2e2; color: #991b1b; }
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #111; color: white; padding: 10px 20px; border-radius: 12px;
+      font-weight: 700; font-size: 14px; z-index: 99999;
+      transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -266,16 +362,20 @@
         <p>Buraya bakan gay</p>
       </div>
       <div class="controls-top">
-        <select id="playerCount" class="select">
-          <option value="2" selected>2 oyuncu</option>
-          <option value="3">3 oyuncu</option>
-          <option value="4">4 oyuncu</option>
-          <option value="5">5 oyuncu</option>
-          <option value="6">6 oyuncu</option>
-          <option value="7">7 oyuncu</option>
-        </select>
-        <button id="newGameBtn" class="btn primary">Yeni Oyun</button>
-      </div>
+          <div class="save-row">
+            <button id="saveBtn" class="btn save">💾 Kaydet</button>
+            <button id="loadBtn" class="btn load">📂 Yükle</button>
+          </div>
+          <select id="playerCount" class="select">
+            <option value="2" selected>2 oyuncu</option>
+            <option value="3">3 oyuncu</option>
+            <option value="4">4 oyuncu</option>
+            <option value="5">5 oyuncu</option>
+            <option value="6">6 oyuncu</option>
+            <option value="7">7 oyuncu</option>
+          </select>
+          <button id="newGameBtn" class="btn primary">Yeni Oyun</button>
+        </div>
     </div>
 
     <div class="layout">
@@ -325,6 +425,11 @@
           <h3>Oyun Akışı</h3>
           <div id="logList" class="log-list"></div>
         </div>
+
+        <div class="panel">
+          <h3>📊 İstatistikler</h3>
+          <div id="statsPanel" class="stats-grid"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -338,6 +443,18 @@
       </div>
     </div>
   </div>
+
+  <div id="setupOverlay" class="setup-overlay">
+    <div class="setup-modal">
+      <div class="setup-header">🎲 NOVICEPOLY — Oyuncular</div>
+      <div id="setupBody" class="setup-body"></div>
+      <div class="setup-footer">
+        <button id="setupStartBtn" class="btn primary">Oyunu Başlat</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
 
   <script>
     const COLORS = {
@@ -357,6 +474,9 @@
       { color: '#f59e0b', label: 'Turuncu' }, { color: '#14b8a6', label: 'Turkuaz' },
       { color: '#64748b', label: 'Gri' }
     ];
+
+    // YENİ EMOJİ LİSTESİ
+    const EMOJIS = ['🎓', '☕', '🚌', '🐱', '🎸', '⚽', '💻', '👽', '🍕', '🚗'];
 
     const board = [
       { id: 0, type: 'go', name: 'Başlangıç' },
@@ -446,6 +566,7 @@
       selectedTileId: 0, pendingTileId: null, message: '', log: [],
       chanceDeck: [], communityDeck: [], gameOver: false, turnStarted: false,
       turnSummary: 'Henüz bir hamle yapılmadı.',
+      stats: {},
     };
 
     const el = {
@@ -458,7 +579,12 @@
       playerCount: document.getElementById('playerCount'), newGameBtn: document.getElementById('newGameBtn'),
       cardModalOverlay: document.getElementById('cardModalOverlay'), cardModalHeader: document.getElementById('cardModalHeader'),
       cardModalBody: document.getElementById('cardModalBody'), cardModalBtn: document.getElementById('cardModalBtn'),
-      turnSummary: document.getElementById('turnSummary')
+      turnSummary: document.getElementById('turnSummary'),
+      statsPanel: document.getElementById('statsPanel'),
+      setupOverlay: document.getElementById('setupOverlay'), setupBody: document.getElementById('setupBody'),
+      setupStartBtn: document.getElementById('setupStartBtn'),
+      saveBtn: document.getElementById('saveBtn'), loadBtn: document.getElementById('loadBtn'),
+      toast: document.getElementById('toast'),
     };
 
     // DESTE KARIŞTIRICI
@@ -491,11 +617,23 @@
       return `<div class="owner-ribbon" style="background:${owner.color}"></div>`;
     }
 
-    function createPlayers(count) {
+    // GÜNCELLENEN CREATE PLAYERS FONKSİYONU
+    function createPlayers(count, playersData = []) {
       return Array.from({ length: count }, (_, i) => ({
-        id: i + 1, name: `Oyuncu ${i + 1}`, color: TOKENS[i].color,
+        id: i + 1, 
+        name: playersData[i]?.name || `Oyuncu ${i + 1}`, 
+        emoji: playersData[i]?.emoji || EMOJIS[i],
+        color: TOKENS[i].color,
         money: 1500, position: 0, properties: [], inJail: false, jailTurns: 0, getOutOfJailCards: 0,
       }));
+    }
+
+    function initStats(players) {
+      const s = {};
+      players.forEach(p => {
+        s[p.id] = { diceRolls: 0, totalRentPaid: 0, totalRentReceived: 0 };
+      });
+      return s;
     }
 
     function addLog(text) {
@@ -571,6 +709,8 @@
       const to = state.players.find(p => p.id === toId);
       from.money -= amount;
       to.money += amount;
+      if (state.stats[fromId]) state.stats[fromId].totalRentPaid += amount;
+      if (state.stats[toId]) state.stats[toId].totalRentReceived += amount;
       checkBankruptcy();
     }
 
@@ -835,6 +975,7 @@
       const total = d1 + d2;
       state.dice = [d1, d2];
       state.turnStarted = true;
+      if (state.stats[player.id]) state.stats[player.id].diceRolls++;
       setTurnSummary(`${player.name} zar attı: ${d1} + ${d2} = ${total}.`);
 
       if (player.inJail) {
@@ -990,8 +1131,81 @@
       render();
     }
 
-    function newGame(count) {
-      state.players = createPlayers(count);
+    function getNetWorth(player) {
+      let worth = player.money;
+      player.properties.forEach(id => {
+        const tile = board[id];
+        const ts = tileState(id);
+        if (!ts.mortgaged) {
+          worth += tile.price;
+          worth += ts.houses * (HOUSE_COST[tile.group] || 0);
+          if (ts.hotel) worth += (HOUSE_COST[tile.group] || 0);
+        } else {
+          worth += tile.mortgage || 0;
+        }
+      });
+      return worth;
+    }
+
+    function showToast(msg) {
+      el.toast.textContent = msg;
+      el.toast.classList.add('show');
+      setTimeout(() => el.toast.classList.remove('show'), 2200);
+    }
+
+    function saveGame() {
+      try {
+        localStorage.setItem('novicepoly_save', JSON.stringify(state));
+        showToast('✅ Oyun kaydedildi!');
+      } catch(e) {
+        showToast('❌ Kayıt başarısız.');
+      }
+    }
+
+    function loadGame() {
+      try {
+        const saved = localStorage.getItem('novicepoly_save');
+        if (!saved) { showToast('📂 Kayıtlı oyun bulunamadı.'); return; }
+        const loaded = JSON.parse(saved);
+        Object.assign(state, loaded);
+        showToast('📂 Oyun yüklendi!');
+        render();
+      } catch(e) {
+        showToast('❌ Yükleme başarısız.');
+      }
+    }
+
+    // GÜNCELLENEN SETUP EKRANI (EMOJİ SEÇİCİ İLE)
+    function showSetupModal(count) {
+      el.setupBody.innerHTML = Array.from({ length: count }, (_, i) => `
+        <div class="setup-player-row">
+          <div class="setup-color-dot" style="background:${TOKENS[i].color}"></div>
+          <select class="setup-emoji-select" id="emojiInput${i}">
+            ${EMOJIS.map((e, idx) => `<option value="${e}" ${idx === i ? 'selected' : ''}>${e}</option>`).join('')}
+          </select>
+          <input class="setup-input" id="nameInput${i}" type="text"
+            placeholder="Oyuncu ${i + 1}" maxlength="18"
+            value="" autocomplete="off" />
+        </div>
+      `).join('');
+      el.setupOverlay.classList.add('active');
+      document.getElementById('nameInput0')?.focus();
+    }
+
+    // GÜNCELLENEN BAŞLATMA FONKSİYONU
+    function startGameWithNames(count) {
+      const playersData = Array.from({ length: count }, (_, i) => {
+        const name = document.getElementById(`nameInput${i}`)?.value.trim() || `Oyuncu ${i + 1}`;
+        const emoji = document.getElementById(`emojiInput${i}`)?.value || EMOJIS[i];
+        return { name, emoji };
+      });
+      el.setupOverlay.classList.remove('active');
+      newGame(count, playersData); 
+    }
+
+    // GÜNCELLENEN YENİ OYUN FONKSİYONU
+    function newGame(count, playersData = []) {
+      state.players = createPlayers(count, playersData);
       state.currentPlayer = 0;
       state.owned = {};
       state.tileStates = {};
@@ -1003,14 +1217,13 @@
       state.gameOver = false;
       state.turnStarted = false;
       state.turnSummary = 'Henüz bir hamle yapılmadı.';
-      
-      // OYUN BAŞINDA DESTELERİ KARIŞTIRIYORUZ
+      state.stats = initStats(state.players);
+
       state.chanceDeck = shuffleArray(ORIGINAL_CHANCE);
       state.communityDeck = shuffleArray(ORIGINAL_COMMUNITY);
 
       render();
     }
-
 
     function animateMove(playerId, fromPos, toPos, onComplete) {
       const player = state.players.find(p => p.id === playerId);
@@ -1066,7 +1279,8 @@
           else if (tile.id === 20) inner = `<div style="transform: rotate(135deg); text-align:center;"><div style="font-size: clamp(6px, 1.2cqw, 11px); font-weight: 700;">MESCİT</div><div style="font-size: clamp(14px, 2.5cqw, 34px); color:#d92323;">🚘</div><div style="font-size: clamp(10px, 1.8cqw, 24px); font-weight: 900;">OTOPARK</div></div>`;
           else if (tile.id === 30) inner = `<div style="transform: rotate(-135deg); text-align:center;"><div style="font-size: clamp(10px, 1.8cqw, 24px); font-weight: 900;">SİLİVRİ</div><div style="font-size: clamp(14px, 2.5cqw, 34px);">👮</div><div style="font-size: clamp(10px, 1.8cqw, 24px); font-weight: 900;">ZAMANI</div></div>`;
           
-          div.innerHTML = `${getOwnerRibbonHTML(tile)}<div class="tile-inner">${inner}</div><div class="player-dots">${occupants.map(p => `<span class="mini-player" style="background:${p.color}"></span>`).join('')}</div>`;
+          // GÜNCELLENEN PİYON RENDER KISMI (EMOJİLİ)
+          div.innerHTML = `${getOwnerRibbonHTML(tile)}<div class="tile-inner">${inner}</div><div class="player-dots">${occupants.map(p => `<span class="mini-player" style="background:${p.color}">${p.emoji}</span>`).join('')}</div>`;
         } else {
           const hasColorBar = tile.type === 'property';
           let innerContent = '';
@@ -1095,13 +1309,14 @@
             `;
           }
 
+          // GÜNCELLENEN PİYON RENDER KISMI (EMOJİLİ)
           div.innerHTML = `
             ${getOwnerRibbonHTML(tile)}
             <div class="tile-inner">
               ${innerContent}
             </div>
             <div class="player-dots">
-              ${occupants.map(p => `<span class="mini-player" style="background:${p.color}"></span>`).join('')}
+              ${occupants.map(p => `<span class="mini-player" style="background:${p.color}">${p.emoji}</span>`).join('')}
             </div>
           `;
         }
@@ -1143,7 +1358,8 @@
       const owner = ownerId ? state.players.find(p => p.id === ownerId) : null;
 
       if (owner) {
-        html += `<div class="info-box" style="margin-top:12px; display:flex; align-items:center; gap:8px;"><span class="token" style="background:${owner.color}"></span> Sahip: <strong>${owner.name}</strong></div>`;
+        // SAHİPLİK KUTUSUNDA EMOJİ GÖSTERİMİ EKLENDİ
+        html += `<div class="info-box" style="margin-top:12px; display:flex; align-items:center; gap:8px;"><span class="token" style="background:${owner.color}">${owner.emoji}</span> Sahip: <strong>${owner.name}</strong></div>`;
       }
 
       if (tile.price != null) {
@@ -1183,13 +1399,14 @@
       el.selectedTile.innerHTML = html;
     }
 
+    // GÜNCELLENEN OYUNCU LİSTESİ RENDER KISMI (EMOJİLİ)
     function renderPlayers() {
       el.playersList.innerHTML = state.players.map((p, idx) => `
         <div class="player-card ${idx === state.currentPlayer ? 'active' : ''}">
           <div class="player-head">
             <div>
               <div class="player-name-row">
-                <span class="token" style="background:${p.color}"></span>
+                <span class="token" style="background:${p.color}">${p.emoji}</span>
                 <strong>${p.name}</strong>
               </div>
               <div class="small muted" style="margin-top:4px;">Konum: ${board[p.position].name.replace('<br>', ' ')}</div>
@@ -1227,8 +1444,37 @@
       el.endTurnBtn.disabled = state.gameOver || !state.turnStarted;
     }
 
+    // GÜNCELLENEN İSTATİSTİKLER RENDER KISMI (EMOJİLİ)
+    function renderStats() {
+      const worths = state.players.map(p => getNetWorth(p));
+      const maxWorth = Math.max(...worths, 1);
+      el.statsPanel.innerHTML = state.players.map((p, i) => {
+        const s = state.stats[p.id] || {};
+        const worth = worths[i];
+        const pct = Math.round((worth / maxWorth) * 100);
+        return `
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="token" style="background:${p.color}">${p.emoji}</span>
+              <strong>${p.name}</strong>
+              <span class="pill" style="margin-left:auto;">M${worth} net</span>
+            </div>
+            <div class="stat-rows">
+              <div class="stat-row"><div class="stat-label">Nakit</div><div class="stat-value">M${p.money}</div></div>
+              <div class="stat-row"><div class="stat-label">Zar sayısı</div><div class="stat-value">${s.diceRolls || 0}</div></div>
+              <div class="stat-row"><div class="stat-label">Ödenen kira</div><div class="stat-value">M${s.totalRentPaid || 0}</div></div>
+              <div class="stat-row"><div class="stat-label">Alınan kira</div><div class="stat-value">M${s.totalRentReceived || 0}</div></div>
+            </div>
+            <div class="net-worth-bar">
+              <div class="net-worth-fill" style="width:${pct}%;background:${p.color}"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     function render() {
-      renderBoard(); renderSelectedTile(); renderPlayers(); renderLog(); renderStatus();
+      renderBoard(); renderSelectedTile(); renderPlayers(); renderLog(); renderStatus(); renderStats();
     }
 
     /* Event Listeners */
@@ -1237,9 +1483,16 @@
     el.endTurnBtn.addEventListener('click', endTurn);
     el.buildBtn.addEventListener('click', buildOnSelectedTile);
     el.mortgageBtn.addEventListener('click', mortgageSelectedTile);
-    el.newGameBtn.addEventListener('click', () => newGame(Number(el.playerCount.value)));
+    el.newGameBtn.addEventListener('click', () => showSetupModal(Number(el.playerCount.value)));
+    el.saveBtn.addEventListener('click', saveGame);
+    el.loadBtn.addEventListener('click', loadGame);
+    el.setupStartBtn.addEventListener('click', () => startGameWithNames(Number(el.playerCount.value)));
+    el.setupBody.addEventListener('keydown', e => {
+      if (e.key === 'Enter') startGameWithNames(Number(el.playerCount.value));
+    });
 
-    newGame(2);
+    // İlk açılışta setup modal göster
+    showSetupModal(2);
   </script>
 </body>
 </html>
